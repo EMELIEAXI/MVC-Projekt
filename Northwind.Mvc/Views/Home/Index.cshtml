@@ -1,8 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p class="alert alert-primary">@DateTime.Now.ToLongTimeString()</p>
+    <h2 class="">Northwind visitors</h2>
+
+    <p> We have had @Model.VisitorCount visitors!</p>
 </div>
