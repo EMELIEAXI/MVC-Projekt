@@ -1,0 +1,17 @@
+﻿@page
+@using PraktiskaAppar
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Northwind.razor.Employees.Areas.NorthwindFeatures.Pages.CustomersModel
+@using Northwind.EntityModels
+
+<div class="row"></div>
+    <h1 class="display-2">Customers</h1>
+</div>
+<div class="row">
+    @foreach (Customer customer in Model.Customers)
+    {
+        <div class="col-sm-3">
+            <partial name="_Customer" model="customer" />
+        </div>
+    }
+</div>

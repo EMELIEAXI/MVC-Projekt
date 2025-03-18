@@ -1,0 +1,29 @@
+﻿@page
+@functions {
+    public string? DayName {get; set;}
+    public void OnGet()
+    {
+        ViewData["Title"] = "Northwind APP Homepage";
+        DayName = DateTime.Now.DayOfWeek.ToString();
+    }
+}
+
+<div class="jombotron">
+    <h1 class="display-3"> Welcome to @ViewData["Title"]</h1>
+    <p class="lead">We supply product to our costumers</p>
+    <hr />
+
+    <p>It's @DayName! Our costumers are restaurants, hotel and crusers</p>
+    <p>
+        <a class="btn btn-primary" 
+           href="suppliers">Learn more about our suppliers</a>
+    </p>
+    <p>
+        <a class="btn btn-primary"
+           href="NorthwindFeatures/employees">Contact our employees!</a>
+    </p>
+    <p>
+        <a class="btn btn-primary"
+           href="NorthwindFeatures/customers">Contact our Customers!</a>
+    </p>
+</div>
