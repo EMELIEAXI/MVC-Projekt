@@ -1,0 +1,43 @@
+﻿@model HomeModelBindningViewModel
+@{
+    ViewData["Title"] = "ModelBindning"; 
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    Enter valies for yout thing in the following form:
+</div>
+<form method="post" action="/home/modelbindning?id=3">
+    <input name="id" value="1" />
+    <input name="color" value="Red" />
+    <input name="email" value="test@hej.com" />
+    <input type="submit" />
+</form>
+
+@if (Model is not null)
+{
+    <h2>Submitted Thing</h2>
+    <hr />
+    <div>
+        <dl class="dl-horizontal">
+            <dt>Color</dt>
+            <dd>@Model.thing.Color</dd>
+
+            <dt>Model ID</dt>
+            <dd>@Model.thing.Id</dd>
+
+            <dt>Email</dt>
+            <dd>@Model.thing.Email</dd>
+        </dl>
+    </div>
+    @if (Model.HasErrors)
+    {
+        <div>
+            @foreach (string errorMessage in Model.ValidationsErrors)
+            {
+                <div class="alert alert-danger">@errorMessage</div>
+            }
+        </div>
+    }
+}
