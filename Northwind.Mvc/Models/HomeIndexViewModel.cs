@@ -1,7 +1,7 @@
 ﻿using PraktiskaAppar;
 namespace Northwind.Mvc.Models
 {
-    public class HomeIndexViewModel
+    public record HomeIndexViewModel
     (
         int VisitorCount,
         IList <Category> Categories,
