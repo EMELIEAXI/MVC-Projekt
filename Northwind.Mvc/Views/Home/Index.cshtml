@@ -13,7 +13,7 @@
 @if (Model is not null)
 {
     <div id="categories" class="carousel slide" data-bs-ride="carousel"
-    data-bs-interval="1000" data-keybord="true">
+    data-bs-interval="3000" data-keybord="true">
     <ol class="carousel-indicators">
             @for (int c = 0; c < Model.Categories.Count; c++)
             {
@@ -25,7 +25,7 @@
                 {
                     currentItem = "";
                 }
-                <li data-bs-target="#categories" data-slide-to="@c" class="@currentItem"></li>
+                <li data-bs-target="#categories" data-bs-slide-to="@c" class="@currentItem"></li>
             }
     </ol>
         <div class="carousel-inner">
@@ -40,7 +40,7 @@
                     currentItem = "";
                 }
                 <div class="carousel-item @currentItem">
-                    <img class="d-block w-100" src="~/images/category@(Model.Categories[c].CategoryId).jpg" alt="@Model.Categories[c].CategoryName"/>
+                    <img class="d-block custom-img" src="~/images/category@(Model.Categories[c].CategoryId).jpg" alt="@Model.Categories[c].CategoryName" />
                         <div class="carousel-caption d-none d-md-block">
                             <h2>@Model.Categories[c].CategoryName</h2>
                             <h3>@Model.Categories[c].Description</h3>
@@ -59,8 +59,9 @@
 
 
         <a class="carousel-control-next" href="#categories" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
+            <span class="sr-only">Next</span>
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                
         </a>
     </div>
 }
@@ -77,13 +78,13 @@
                     {
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <a asp-controller="Home" asp-action="ProductDetail" asp-route-id="@p.ProductId" 
-                            class="btn btn-outline-primary">
-                            <div class="ms-2 me-auto">
-                                @p.ProductName
-                            </div>
-                            <span class="badge bg-primary rounded-pill">
+                                class="btn btn-outline-primary">
+                                <div class="ms-2 me-auto">
+                                  @p.ProductName
+                                </div>
+                                  <span class="badge bg-primary rounded-pill">
                                     @(p.UnitPrice is null? "zero" : p.UnitPrice.Value.ToString("C"))
-                            </span>
+                                  </span>
                             </a>
                         </li>
                     }

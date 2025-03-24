@@ -21,7 +21,7 @@ namespace Northwind.Mvc.Controllers
         {
             HomeIndexViewModel model = new (
 
-                VisitorCount: Random.Shared.Next(1, 1000),
+                VisitorCount: Random.Shared.Next(1, 1001),
                 Categories: db.Categories.ToList(),
                 Products: db.Products.ToList()
                 );
