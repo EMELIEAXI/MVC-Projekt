@@ -1,0 +1,60 @@
+﻿@model PraktiskaAppar.Category
+@{
+    ViewData["Title"] = "Product Detail - " + Model.CategoryName;
+}
+<h2>Products in @Model.CategoryName:</h2>
+<hr />
+<div class="row">
+@if (Model.Products.Any())
+{
+            <div id="product-columns">
+                <ul class="list-group">
+                    @foreach (var product in Model.Products) 
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <a asp-controller="Home" asp-action="ProductDetail" asp-route-id="@product.ProductId" 
+                                class="btn btn-outline-primary">
+                                <div class="ms-2 me-auto">
+                                  @product.ProductName
+                                </div>
+                                  <span class="badge bg-primary rounded-pill">
+                                    @(product.UnitPrice is null? "zero" : product.UnitPrice.Value.ToString("C"))
+                                  </span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+ }
+ else
+ {
+    <p>There are no products in this category.</p>
+ }
+ 
+</div>
+
+
+
+
+@* {
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.ProductName</h5>
+
+                        <p class="card-text"><strong>@product.UnitPrice.Value.ToString() kr</strong></p>
+                        <a asp-controller="Home" asp-action="ProductDetail" asp-route-id="@product.ProductId" class="btn btn-primary">View Product</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+} *@
+
+
+ 
+
+<a href="/">Tillbaka</a>

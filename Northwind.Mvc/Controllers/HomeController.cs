@@ -3,6 +3,8 @@ using Northwind.Mvc.Models;
 using System.Diagnostics;
 using PraktiskaAppar;
 using Northwind.EntityModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Northwind.Mvc.Controllers
 {
@@ -23,11 +25,13 @@ namespace Northwind.Mvc.Controllers
 
                 VisitorCount: Random.Shared.Next(1, 1001),
                 Categories: db.Categories.ToList(),
-                Products: db.Products.ToList()
+                Products: db.Products.ToList(),
+                ProductICategory: db.Products.Include(p => p.Category).ToList()
                 );
 
             return View(model);
         }
+            
         public IActionResult ProductDetail(int? id)
         {
             if (!id.HasValue)
@@ -43,6 +47,26 @@ namespace Northwind.Mvc.Controllers
 
             return View(model);
         }
+
+        public IActionResult ViewCategory(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return BadRequest("Category ID is missing");
+            }
+
+            var category = db.Categories
+                .Include(c => c.Products) // Ladda relaterade produkter
+                .FirstOrDefault(c => c.CategoryId == id);
+
+            if (category == null)
+            {
+                return NotFound($"Category with ID {id} not found.");
+            }
+
+            return View(category); // Skicka kategorin och dess produkter till vyn
+        }
+
 
         public IActionResult ModelBindning()
         {
@@ -61,6 +85,8 @@ namespace Northwind.Mvc.Controllers
                 );
             return View(thing); //en sida som visar det användaren skickade
         }
+
+        [Authorize(Roles ="Admin")]
 
         public IActionResult Privacy()
         {
