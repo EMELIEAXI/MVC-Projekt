@@ -56,7 +56,7 @@ namespace Northwind.Mvc.Controllers
             }
 
             var category = db.Categories
-                .Include(c => c.Products) // Ladda relaterade produkter
+                .Include(c => c.Products) //Produkter i den kategorin 
                 .FirstOrDefault(c => c.CategoryId == id);
 
             if (category == null)
@@ -64,7 +64,7 @@ namespace Northwind.Mvc.Controllers
                 return NotFound($"Category with ID {id} not found.");
             }
 
-            return View(category); // Skicka kategorin och dess produkter till vyn
+            return View(category);
         }
 
 
