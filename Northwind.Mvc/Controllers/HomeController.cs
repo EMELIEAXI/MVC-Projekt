@@ -26,7 +26,7 @@ namespace Northwind.Mvc.Controllers
                 VisitorCount: Random.Shared.Next(1, 1001),
                 Categories: db.Categories.ToList(),
                 Products: db.Products.ToList(),
-                ProductICategory: db.Products.Include(p => p.Category).ToList()
+                ProductsInCategory: db.Products.Include(p => p.Category).ToList()
                 );
 
             return View(model);
