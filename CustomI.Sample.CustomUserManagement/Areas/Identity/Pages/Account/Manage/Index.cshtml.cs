@@ -56,6 +56,18 @@ namespace CustomI.Sample.CustomUserManagement.Areas.Identity.Pages.Account.Manag
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+
+            [Display(Name = "Profile picture")]
+            public byte[] Picture { get; set; }
+
+            [Required]
+            [StringLength(30,
+                ErrorMessage = "The {0} must be at least {2} and at max {1} charachters long", 
+                MinimumLength = 4)]
+            [Display(Name = "Full Name")]
+
+            public string FullName { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -65,12 +77,17 @@ namespace CustomI.Sample.CustomUserManagement.Areas.Identity.Pages.Account.Manag
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var fullName = user.FullName;
+            var picture = user.Picture;
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FullName = fullName,
+                Picture = picture
+
             };
         }
 
@@ -100,6 +117,11 @@ namespace CustomI.Sample.CustomUserManagement.Areas.Identity.Pages.Account.Manag
                 return Page();
             }
 
+            var fullName = user.FullName;
+            if (Input.FullName != fullName)
+            {
+                user.FullName = Input.FullName;
+            }
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {

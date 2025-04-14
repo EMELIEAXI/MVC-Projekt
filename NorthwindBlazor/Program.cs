@@ -1,11 +1,9 @@
-using Northwind.Blazor2.Components;
+using NorthwindBlazor.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
-
-builder.Services.AddNorthwindContext();
 
 var app = builder.Build();
 
